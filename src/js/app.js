@@ -1,6 +1,6 @@
 import goblinImage from '../images/goblin.png';
 
-export class Widget {
+export default class Widget {
   constructor(contentName) {
     this.contentName = contentName;
     this.position = -1;
@@ -41,7 +41,6 @@ export class Widget {
   }
 
   nextPosition() {
-    
     let randInt;
 
     do {
@@ -55,7 +54,6 @@ export class Widget {
     });
     contentField[randInt].classList.add('goblin-image');
     this.position = randInt;
-  
   }
 
   nextPositionTemporary() {
