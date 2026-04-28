@@ -4,21 +4,24 @@ export default class Widget {
   constructor(contentName) {
     this.contentName = contentName;
     this.position = -1;
+    this.field_size = 16;
+    this.move_interval = 3000;
 
     const content = document.createElement('div');
     content.className = this.contentName;
     content.style.display = 'flex';
     content.style.flexWrap = 'wrap';
-    content.style.width = '480px';
-    document.body.appendChild(content);
+    content.style.width = '486px';
+    document.body.append(content);
 
-    for (let i = 0; i < 16; i += 1) {
+    for (let i = 0; i < this.field_size; i += 1) {
       const field = document.createElement('div');
       field.className = 'field';
       field.style.width = '120px';
       field.style.height = '120px';
       field.style.backgroundColor = 'gray';
-      content.appendChild(field);
+      field.style.border = 'solid 1px white'
+      content.append(field);
     }
     Widget.createGoblinClass();
     this.nextPosition();
@@ -36,7 +39,7 @@ export default class Widget {
                     background-repeat: no-repeat;
                 }
             `;
-      document.head.appendChild(styleSheet);
+      document.head.append(styleSheet);
     }
   }
 
@@ -44,10 +47,12 @@ export default class Widget {
     let randInt;
 
     do {
-      randInt = Math.floor(Math.random() * 16);
+      randInt = Math.floor(Math.random() * this.field_size);
     } while (randInt === this.position);
 
-    const contentField = document.querySelector(`.${this.contentName}`).querySelectorAll('.field');
+    const container = document.querySelector(`.${this.contentName}`);
+if (!container) return;
+const contentField = container.querySelectorAll('.field');
 
     contentField.forEach((field) => {
       field.classList.remove('goblin-image');
@@ -57,9 +62,16 @@ export default class Widget {
   }
 
   nextPositionTemporary() {
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.nextPosition();
-    }, 3000);
+    }, this.move_interval);
+  }
+
+  stop() {
+    if (this.intervalId) {
+        clearInterval(this.intervalId);
+        this.intervalId = null;
+    }
   }
 }
 
