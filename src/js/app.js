@@ -20,7 +20,7 @@ export default class Widget {
       field.style.width = '120px';
       field.style.height = '120px';
       field.style.backgroundColor = 'gray';
-      field.style.border = 'solid 1px white'
+      field.style.border = 'solid 1px white';
       content.append(field);
     }
     Widget.createGoblinClass();
@@ -51,8 +51,8 @@ export default class Widget {
     } while (randInt === this.position);
 
     const container = document.querySelector(`.${this.contentName}`);
-if (!container) return;
-const contentField = container.querySelectorAll('.field');
+    if (!container) return;
+    const contentField = container.querySelectorAll('.field');
 
     contentField.forEach((field) => {
       field.classList.remove('goblin-image');
@@ -69,8 +69,8 @@ const contentField = container.querySelectorAll('.field');
 
   stop() {
     if (this.intervalId) {
-        clearInterval(this.intervalId);
-        this.intervalId = null;
+      clearInterval(this.intervalId);
+      this.intervalId = null;
     }
   }
 }

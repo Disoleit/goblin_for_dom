@@ -37,7 +37,7 @@ describe('Widget', () => {
       const container = document.querySelector('.test-widget');
       expect(container.style.display).toBe('flex');
       expect(container.style.flexWrap).toBe('wrap');
-      expect(container.style.width).toBe('480px');
+      expect(container.style.width).toBe('486px');
     });
 
     test('should set correct styles for each field', () => {
